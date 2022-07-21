@@ -18,7 +18,9 @@ function App() {
 
   return (
     <div className="m-5">
-      <h1 className="text-5xl font-bold text-accent-focus">Upcoming Contests</h1>
+      <h1 className="text-5xl mx-5 font-bold text-accent-focus">
+        Upcoming Contests
+      </h1>
       <div className="stats shadow mt-3">
         <div className="stat">
           <div className="stat-figure text-secondary">
@@ -62,19 +64,21 @@ function App() {
                 </td>
                 <td className="p-3 text-lg">
                   {moment(`${contest.start_time}`)
-                    .utc()
+                    .utcOffset(330)
                     .format("MMMM Do YYYY, h:mm a")}
                 </td>
                 <td className="p-3 text-lg">
                   {moment(`${contest.end_time}`)
-                    .utc()
+                    .utcOffset(330)
                     .format("MMMM Do YYYY, h:mm a")}
                 </td>
               </tr>
             ))}
         </tbody>
       </table>
-      <h1 className="text-5xl font-bold text-accent-focus">Running Contests</h1>
+      <h1 className="text-5xl mx-5 font-bold text-accent-focus">
+        Running Contests
+      </h1>
       <div className="stats shadow mt-3">
         <div className="stat">
           <div className="stat-figure text-primary">
@@ -117,12 +121,12 @@ function App() {
                 </td>
                 <td className="p-3 text-lg">
                   {moment(`${contest.start_time}`)
-                    .utc()
+                    .utcOffset(330)
                     .format("MMMM Do YYYY, h:mm a")}
                 </td>
                 <td className="p-3 text-lg">
                   {moment(`${contest.end_time}`)
-                    .utc()
+                    .utcOffset(330)
                     .format("MMMM Do YYYY, h:mm a")}
                 </td>
               </tr>
