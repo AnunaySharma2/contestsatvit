@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Loading from "./Loading";
+import Navbar from "./Navbar";
 import Stat from "./Stat";
 import Table from "./Table";
 
@@ -23,16 +24,16 @@ function App() {
 
   return (
     <div className="m-5">
-      <h1 className="text-5xl mx-5 font-bold text-accent-focus">
+      <Navbar />
+      <h1 className="text-5xl mx-5 my-3 font-bold text-accent-focus">
         Upcoming Contests
       </h1>
       <Loading loading={loading} />
       <Stat statTitle={"Upcoming Contests"} contestInfo={contestInfo} />
       <Table tableContent={contestInfo} />
-      <h1 className="text-5xl mx-5 font-bold text-accent-focus">
+      <h1 className="text-5xl mx-5 my-3 font-bold text-accent-focus">
         Running Contests
       </h1>
-      {loading && <h1 className="mx-5 my-5">Loading...</h1>}
       <Loading loading={loading} />
       <Stat statTitle={"Running Contests"} contestInfo={runningContests} />
       <Table tableContent={runningContests} />
