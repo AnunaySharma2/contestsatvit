@@ -1,21 +1,20 @@
 import React from "react";
 import moment from "moment";
 
-
-function Table({tableContent}) {
+function Table({ tableContent }) {
   return (
-    <div>
-      <table className="table-zebra my-5 mx-auto w-full">
-        <thead>
-          <tr>
-            <td className="p-3 font-bold text-lg">Name</td>
-            <td className="p-3 font-bold text-lg">Start time</td>
-            <td className="p-3 font-bold text-lg">End time</td>
-          </tr>
-        </thead>
-        <tbody>
-          {tableContent &&
-            tableContent.map((contest, idx) => (
+    <>
+      {tableContent && tableContent.length > 0 && (
+        <table className="table-zebra my-5 mx-auto w-full">
+          <thead>
+            <tr>
+              <td className="p-3 font-bold text-lg">Name</td>
+              <td className="p-3 font-bold text-lg">Start time</td>
+              <td className="p-3 font-bold text-lg">End time</td>
+            </tr>
+          </thead>
+          <tbody>
+            {tableContent.map((contest, idx) => (
               <tr key={idx}>
                 <td className="p-3 font-bold text-lg">
                   <a href={contest.url} target="blank">
@@ -34,9 +33,10 @@ function Table({tableContent}) {
                 </td>
               </tr>
             ))}
-        </tbody>
-      </table>
-    </div>
+          </tbody>
+        </table>
+      )}
+    </>
   );
 }
 
