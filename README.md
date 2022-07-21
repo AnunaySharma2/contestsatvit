@@ -1,3 +1,9 @@
+# About this app
+
+Contests At VIT lists all the contests which are currently running so users can
+participate in them. It lists contests from CodeChef, CodeForces, Leetcode,
+HackerEarth, HackerRank, TopCoder and AtCoder.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
