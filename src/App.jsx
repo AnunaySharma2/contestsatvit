@@ -1,16 +1,19 @@
 import { useState, useEffect } from "react";
-import moment from "moment";
+import Table from "./Table";
 
 function App() {
   const [contestInfo, setContestInfo] = useState();
   const [runningContests, setRunningContests] = useState();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async (endpoint) => {
+      setLoading(true);
       const resp = await fetch(endpoint);
       const data = await resp.json();
       setContestInfo(data.filter((contest) => contest.in_24_hours === "Yes"));
       setRunningContests(data.filter((contest) => contest.status === "CODING"));
+      setLoading(false);
     };
 
     fetchData("https://kontests.net/api/v1/all");
@@ -21,6 +24,7 @@ function App() {
       <h1 className="text-5xl mx-5 font-bold text-accent-focus">
         Upcoming Contests
       </h1>
+      {loading && <h1 className="mx-5 my-5">Loading...</h1>}
       <div className="stats shadow mt-3">
         <div className="stat">
           <div className="stat-figure text-secondary">
@@ -45,40 +49,12 @@ function App() {
         </div>
       </div>
 
-      <table className="table-zebra my-5 mx-auto w-full">
-        <thead>
-          <tr>
-            <td className="p-3 font-bold text-lg">Name</td>
-            <td className="p-3 font-bold text-lg">Start time</td>
-            <td className="p-3 font-bold text-lg">End time</td>
-          </tr>
-        </thead>
-        <tbody>
-          {contestInfo &&
-            contestInfo.map((contest, idx) => (
-              <tr key={idx}>
-                <td className="p-3 font-bold text-lg">
-                  <a href={contest.url} target="blank">
-                    {contest.name}
-                  </a>
-                </td>
-                <td className="p-3 text-lg">
-                  {moment(`${contest.start_time}`)
-                    .utcOffset(330)
-                    .format("MMMM Do YYYY, h:mm a")}
-                </td>
-                <td className="p-3 text-lg">
-                  {moment(`${contest.end_time}`)
-                    .utcOffset(330)
-                    .format("MMMM Do YYYY, h:mm a")}
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+      <Table tableContent={contestInfo} />
       <h1 className="text-5xl mx-5 font-bold text-accent-focus">
         Running Contests
       </h1>
+      {loading && <h1 className="mx-5 my-5">Loading...</h1>}
+
       <div className="stats shadow mt-3">
         <div className="stat">
           <div className="stat-figure text-primary">
@@ -102,37 +78,7 @@ function App() {
           </div>
         </div>
       </div>
-      <table className="table-zebra my-5 mx-auto w-full">
-        <thead>
-          <tr>
-            <td className="p-3 font-bold text-lg">Name</td>
-            <td className="p-3 font-bold text-lg">Start time</td>
-            <td className="p-3 font-bold text-lg">End time</td>
-          </tr>
-        </thead>
-        <tbody>
-          {runningContests &&
-            runningContests.map((contest, idx) => (
-              <tr key={idx}>
-                <td className="p-3 font-bold text-lg">
-                  <a href={contest.url} target="blank">
-                    {contest.name}
-                  </a>
-                </td>
-                <td className="p-3 text-lg">
-                  {moment(`${contest.start_time}`)
-                    .utcOffset(330)
-                    .format("MMMM Do YYYY, h:mm a")}
-                </td>
-                <td className="p-3 text-lg">
-                  {moment(`${contest.end_time}`)
-                    .utcOffset(330)
-                    .format("MMMM Do YYYY, h:mm a")}
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+      <Table tableContent={runningContests} />
     </div>
   );
 }
