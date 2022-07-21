@@ -21,6 +21,47 @@ function App() {
   return (
     <div className="m-5">
       <h1 className="text-5xl font-bold">Running Contests</h1>
+      <div class="stats shadow mt-3">
+        <div class="stat">
+          <div class="stat-figure text-primary">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              class="inline-block w-8 h-8 stroke-current"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+              ></path>
+            </svg>
+          </div>
+          <div class="stat-title">Running Contests</div>
+          <div class="stat-value text-primary">{runningContests && runningContests.length}</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-figure text-secondary">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              class="inline-block w-8 h-8 stroke-current"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 10V3L4 14h7v7l9-11h-7z"
+              ></path>
+            </svg>
+          </div>
+          <div class="stat-title">Upcoming Contests</div>
+          <div class="stat-value text-secondary">{contestInfo && contestInfo.length}</div>
+        </div>
+      </div>
       <table className="table-zebra my-5 mx-auto w-full">
         <thead>
           <tr>
@@ -52,13 +93,38 @@ function App() {
             ))}
         </tbody>
       </table>
-      <h1 className="text-5xl font-bold">Contests in the next 24 hoursc</h1>
-      {contestInfo &&
-        contestInfo.map((contest, idx) => (
-          <div key={idx}>
-            <h1>{contest.name}</h1>
-          </div>
-        ))}
+      <h1 className="text-5xl font-bold">Upcoming Contests</h1>
+      <table className="table-zebra my-5 mx-auto w-full">
+        <thead>
+          <tr>
+            <td className="p-3 font-bold text-lg">Name</td>
+            <td className="p-3 font-bold text-lg">Start time</td>
+            <td className="p-3 font-bold text-lg">End time</td>
+          </tr>
+        </thead>
+        <tbody>
+          {contestInfo &&
+            contestInfo.map((contest, idx) => (
+              <tr key={idx}>
+                <td className="p-3 font-bold text-lg">
+                  <a href={contest.url} target="blank">
+                    {contest.name}
+                  </a>
+                </td>
+                <td className="p-3 text-lg">
+                  {moment(`${contest.start_time}`)
+                    .utc()
+                    .format("MMMM Do YYYY, h:mm a")}
+                </td>
+                <td className="p-3 text-lg">
+                  {moment(`${contest.end_time}`)
+                    .utc()
+                    .format("MMMM Do YYYY, h:mm a")}
+                </td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
     </div>
   );
 }
