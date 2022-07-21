@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import moment from "moment";
 
 function App() {
   const [contestInfo, setContestInfo] = useState();
@@ -23,9 +24,9 @@ function App() {
       <table className="table-zebra my-5 mx-auto w-full">
         <thead>
           <tr>
-            <th className="p-3 font-bold text-lg">Name</th>
-            <th className="p-3 text-lg">Start time</th>
-            <th className="p-3 text-lg">Duration</th>
+            <td className="p-3 font-bold text-lg">Name</td>
+            <td className="p-3 font-bold text-lg">Start time</td>
+            <td className="p-3 font-bold text-lg">End time</td>
           </tr>
         </thead>
         <tbody>
@@ -37,13 +38,21 @@ function App() {
                     {contest.name}
                   </a>
                 </td>
-                <td className="p-3 text-lg">{contest.start_time}</td>
-                <td className="p-3 text-lg">{contest.duration}</td>
+                <td className="p-3 text-lg">
+                  {moment(`${contest.start_time}`)
+                    .utc()
+                    .format("MMMM Do YYYY, h:mm a")}
+                </td>
+                <td className="p-3 text-lg">
+                  {moment(`${contest.end_time}`)
+                    .utc()
+                    .format("MMMM Do YYYY, h:mm a")}
+                </td>
               </tr>
             ))}
         </tbody>
       </table>
-      <h1 className="text-5xl font-bold">Contests in the next 24 hours</h1>
+      <h1 className="text-5xl font-bold">Contests in the next 24 hoursc</h1>
       {contestInfo &&
         contestInfo.map((contest, idx) => (
           <div key={idx}>
