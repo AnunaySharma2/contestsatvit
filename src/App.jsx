@@ -42,8 +42,19 @@ function App() {
         Running Contests
       </h1>
       <Stat statTitle={"Running Contests"} contestInfo={runningContests} />
-      <Loading loading  ={loading} />
+      <Loading loading={loading} />
       <Table tableContent={runningContests} />
+      <p className="mx-1 p-3 w-fit rounded-md text-green-900 my-3 font-bold bg-green-400">
+        This Project is open source. Click{" "}
+        <a
+          href="https://github.com/AnunaySharma2/contestsatvit"
+          target={"_blank"}
+          className="underline"
+        >
+          here
+        </a>{" "}
+        to start contributing!
+      </p>
     </div>
   );
 }
