@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Navbar(props) {
+  const [currentName, setCurrentName] = useState("All");
+
   const sites = [
     { name: "All", url: "all" },
     { name: "CodeForces", url: "codeforces" },
@@ -12,14 +14,25 @@ function Navbar(props) {
     { name: "LeetCode", url: "leet_code" },
   ];
 
+  const navClickHandler = (site) => {
+    props.changeEndPoint(site.url);
+    setCurrentName(site.name);
+  };
+
   return (
     <div className="flex flex-wrap px-5 py-8 text-xl font-medium gap-5 lg:justify-between">
       {sites.map((site) => (
         <p
           key={site.url}
-          className="hover:scale-110 hover:text-green-400 transition ease-in-out"
+          // className="hover:scale-110 hover:text-green-400 transition ease-in-out"
+          className={
+            site.name === currentName
+              ? "text-green-400"
+              : "hover:scale-110 transition ease-in-out"
+          }
           onClick={() => {
-            props.changeEndPoint(site.url);
+            // props.changeEndPoint(site.url);
+            navClickHandler(site);
           }}
         >
           {site.name}
